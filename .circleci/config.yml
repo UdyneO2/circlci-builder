@@ -1,0 +1,17 @@
+version: 2.1
+jobs:
+  compile:
+   docker:
+      - image: wizardprjkt/build:kernel
+   steps:
+      - run:
+          command: |
+            git clone --depth=1 --recursive https://github.com/SM4250-Dev/kernel_realme_RMX2195 -b StrombreakerX kernel && cd kernel
+            export TZ=Asia/Jakarta
+            bash build.sh
+          no_output_timeout : 1h
+workflows:
+  version: 2.1
+  cooking:
+    jobs:
+      - compile
